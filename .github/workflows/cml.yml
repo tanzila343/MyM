@@ -32,13 +32,13 @@ jobs:
           env:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
           run: |
-            pip install -r requirements.txt
-            python src/pipelines/trainer.py
-            echo "## Model Metrices" > report.md
-            cat reports/matrices.txt >> report.md
+            pip install sphinx
+            pip install sphinx-rtd-theme
+            pip install ghp-import
 
-            echo "\n## Model Performance ."
-            echo "\n## Model Performance are on the plot below."
-            
-            cml-pulish reports/figures/model_result.png --md >>
-            cml-send-comment report.md
+            cd src
+            sphinx-apidoc -o ../docs .
+            cd ..
+            make -C docs clean
+            make -C docs html
+            ghp-import -n -p -f docs/_build/html
