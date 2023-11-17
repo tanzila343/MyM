@@ -1,2 +1,2 @@
 
-Mean Absolute Error = 13.43, Mean Squared Error = 190.54.
+Mean Absolute Error = 10.1, Mean Squared Error = 109.24.
